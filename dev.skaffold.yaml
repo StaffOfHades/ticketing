@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: ticketing
+build:
+  local:
+    push: false
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - image: staffofhades/authentication
+    docker:
+      dockerfile: apps/authentication/dev.Dockerfile
+    sync:
+      manual:
+      - src: "apps/authentication/src/**/*.{js,ts}"
+        dest: .
+      - src: "libs/**/*.{js,ts}"
+        dest: .
+deploy:
+  kubectl:
+    manifests:
+    - infra/k8s/development/*.yaml
+    - infra/k8s/ingress-srv.yaml

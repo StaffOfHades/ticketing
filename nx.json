@@ -27,6 +27,18 @@
         "target": "build",
         "projects": "dependencies"
       }
+    ],
+    "build-image": [
+      {
+        "target": "build",
+        "projects": "self"
+      }
+    ],
+    "deploy": [
+      {
+        "target": "build-image",
+        "projects": "self"
+      }
     ]
   },
   "generators": {

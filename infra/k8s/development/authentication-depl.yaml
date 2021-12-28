@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication
+  template:
+    metadata:
+      labels:
+        app: authentication
+    spec:
+      containers:
+        - name: authentication
+          image: staffofhades/authentication:dev-latest
+          env:
+            - name: PORT
+              value: "3000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentication-clusterip-srv
+spec:
+  selector:
+    app: authentication
+  ports:
+    - name: authentication-clusterip
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

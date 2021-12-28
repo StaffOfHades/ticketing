@@ -1,0 +1,13 @@
+.vscode/
+infra/
+node_modules/
+tools/
+.dockerignore
+.editorconfig
+.gitignore
+.prettierignore
+.prettierrc
+ticketing.sublime-project
+dev.skaffold.yaml
+README.md
+skaffold.yaml

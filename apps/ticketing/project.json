@@ -19,7 +19,8 @@
       "executor": "@nrwl/next:server",
       "options": {
         "buildTarget": "ticketing:build",
-        "dev": true
+        "dev": true,
+        "proxyConfig": "apps/ticketing/proxy.conf.json"
       },
       "configurations": {
         "production": {
