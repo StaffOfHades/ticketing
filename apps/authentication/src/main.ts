@@ -8,13 +8,19 @@ import { json } from "body-parser";
 import * as morgan from "morgan";
 import * as process from 'process';
 
+import { currentUserRouter } from './app/current-user'
+import { signinRouter } from './app/signin'
+import { signoutRouter } from './app/signout'
+import { signupRouter } from './app/signup'
+
 const app = express();
 app.use(json())
 app.use(morgan('dev'));
 
-app.get('/users/currentuser', (req, res) => {
-  res.send({ message: 'Welcome to authentication!' });
-});
+app.use(currentUserRouter)
+app.use(signinRouter)
+app.use(signoutRouter)
+app.use(signupRouter)
 
 const port = process.env.port || 3000;
 const server = app.listen(port, () => {
