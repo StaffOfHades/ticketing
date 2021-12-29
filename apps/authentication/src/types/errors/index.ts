@@ -1,3 +1,4 @@
+export * from './BadRequestError'
 export * from './DatabaseConnectionError'
 export * from './ErrorResponse'
 export * from './NotFoundError'

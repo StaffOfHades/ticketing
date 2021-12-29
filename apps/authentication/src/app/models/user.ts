@@ -1,5 +1,7 @@
 import { Document, HydratedDocument, Model, Schema, model } from "mongoose";
 
+import { Password } from '../services/password'
+
 interface User {
   email: string;
   password: string;
@@ -26,6 +28,14 @@ const userSchema = new Schema<UserDocument, UserModel>(
     }
   },
 );
+
+userSchema.pre('save', async function (done) {
+  if (this.isModified('password')) {
+    const hashedPassword = await Password.toHash(this.get('password'));
+    this.set('password', hashedPassword)
+  }
+  done();
+})
 
 const build: UserModel['build'] = (user) => new UserModel(user);
 userSchema.static('build', build);
