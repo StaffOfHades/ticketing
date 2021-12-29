@@ -1,9 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
-    "types": ["node", "express", "mongoose"]
+    "types": ["node", "express", "mongoose", "cookie-session", "jsonwebtoken"]
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],
   "include": ["**/*.ts"]

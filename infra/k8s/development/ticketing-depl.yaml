@@ -15,6 +15,12 @@ spec:
       containers:
         - name: ticketing
           image: staffofhades/ticketing:dev-latest
+          env:
+            - name: JWT_SIGNATURE
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_SIGNATURE
 ---
 apiVersion: v1
 kind: Service

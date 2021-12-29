@@ -3,11 +3,12 @@
  * This is only a minimal backend to get started.
  */
 
-import * as express from 'express';
+import cookieSession from 'cookie-session';
+import express from 'express';
 import { json } from "body-parser";
-import * as mongoose from "mongoose"
-import * as morgan from "morgan";
-import * as process from 'process';
+import mongoose from "mongoose"
+import morgan from "morgan";
+import process from 'process';
 
 import 'express-async-errors';
 
@@ -21,7 +22,9 @@ import { signoutRouter } from './app/routes/signout'
 import { signupRouter } from './app/routes/signup'
 
 const app = express();
+app.set('trust proxy', true);
 app.use(json())
+app.use(cookieSession({ secure: true, signed: false }))
 app.use(morgan('dev'));
 
 app.use(currentUserRouter)
@@ -39,6 +42,10 @@ app.use(errorHandler)
 const port = process.env.port || 3000;
 
 const start = async () => {
+  if (!process.env.JWT_SIGNATURE) {
+    throw new Error("JWT_SIGNATURE env variable not defined");
+  }
+
   try {
     await mongoose.connect("mongodb://authentication-mongo-clusterip-srv:27017/authentication")
     console.log("MongoDB connection to authentication ready")

@@ -25,7 +25,18 @@ const userSchema = new Schema<UserDocument, UserModel>(
     timestamps: {
       createdAt: true,
       updatedAt: true
-    }
+    },
+    toJSON: {
+      transform: (_, output) => {
+        output.id = output._id;
+        delete output._id;
+        delete output.createdAt;
+        delete output.password;
+        delete output.updatedAt;
+        return output;
+      },
+      versionKey: false,
+    },
   },
 );
 
