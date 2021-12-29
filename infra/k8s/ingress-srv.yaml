@@ -14,6 +14,26 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: authentication-clusterip-srv
+            name: ticketing-clusterip-srv
             port:
               number: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ticketing-srv
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ticketing.dev
+    http:
+      paths:
+      - path: /?(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: ticketing-clusterip-srv
+            port:
+              number: 4200

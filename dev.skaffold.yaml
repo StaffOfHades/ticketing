@@ -8,17 +8,26 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: staffofhades/authentication
+  - image: staffofhades/ticketing
     docker:
-      dockerfile: apps/authentication/dev.Dockerfile
+      dockerfile: dev.Dockerfile
     sync:
       manual:
       - src: "apps/authentication/src/**/*.{js,ts}"
         dest: .
+      - src: "apps/ticketing/src/**/*.{css,sass,scss}"
+        dest: .
+      - src: "apps/ticketing/src/**/*.{js,jsx,ts,tsx}"
+        dest: .
+      - src: "apps/ticketing/src/**/*.html"
+        dest: .
       - src: "libs/**/*.{js,ts}"
+        dest: .
+      - src: "**/tsconfig.{*}.json"
         dest: .
 deploy:
   kubectl:
     manifests:
     - infra/k8s/development/*.yaml
+    - infra/k8s/authentication-mongo-depl.yaml
     - infra/k8s/ingress-srv.yaml

@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authentication-depl
+  name: ticketing-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authentication
+      app: ticketing
   template:
     metadata:
       labels:
-        app: authentication
+        app: ticketing
     spec:
       containers:
-        - name: authentication
-          image: staffofhades/authentication:dev-latest
-          env:
-            - name: PORT
-              value: "3000"
+        - name: ticketing
+          image: staffofhades/ticketing:dev-latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: authentication-clusterip-srv
+  name: ticketing-clusterip-srv
 spec:
   selector:
-    app: authentication
+    app: ticketing
   ports:
     - name: authentication-clusterip
       protocol: TCP
       port: 3000
       targetPort: 3000
+    - name: ticketing-clusterip
+      protocol: TCP
+      port: 4200
+      targetPort: 4200
