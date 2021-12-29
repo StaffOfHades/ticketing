@@ -8,10 +8,16 @@ import { json } from "body-parser";
 import * as morgan from "morgan";
 import * as process from 'process';
 
-import { currentUserRouter } from './app/current-user'
-import { signinRouter } from './app/signin'
-import { signoutRouter } from './app/signout'
-import { signupRouter } from './app/signup'
+import 'express-async-errors';
+
+import { NotFoundError } from './types/errors'
+
+import { errorHandler} from './app/middlewares/error-handler'
+
+import { currentUserRouter } from './app/routes/current-user'
+import { signinRouter } from './app/routes/signin'
+import { signoutRouter } from './app/routes/signout'
+import { signupRouter } from './app/routes/signup'
 
 const app = express();
 app.use(json())
@@ -21,6 +27,13 @@ app.use(currentUserRouter)
 app.use(signinRouter)
 app.use(signoutRouter)
 app.use(signupRouter)
+
+app.all('*', (req) => {
+  throw new NotFoundError(req.path)
+})
+
+// Has to be called after errors occur to properly handle them
+app.use(errorHandler)
 
 const port = process.env.port || 3000;
 const server = app.listen(port, () => {
