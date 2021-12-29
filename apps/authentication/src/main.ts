@@ -5,6 +5,7 @@
 
 import * as express from 'express';
 import { json } from "body-parser";
+import * as mongoose from "mongoose"
 import * as morgan from "morgan";
 import * as process from 'process';
 
@@ -36,10 +37,21 @@ app.all('*', (req) => {
 app.use(errorHandler)
 
 const port = process.env.port || 3000;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
-});
-server.on('error', console.error);
+
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://authentication-mongo-clusterip-srv:27017/authentication")
+    console.log("MongoDB connection to authentication ready")
+  } catch(error) {
+    console.error(error);
+  }
+
+  const server = app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+  });
+
+  server.on('error', console.error);
+}
 
 process.on('SIGINT', () => {
   console.info("Process interrupted")
@@ -49,3 +61,6 @@ process.on('SIGTERM', () => {
   console.info("Process terminated")
   process.exit(0)
 })
+
+
+start()
