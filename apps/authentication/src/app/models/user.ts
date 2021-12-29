@@ -1,6 +1,6 @@
 import { Document, HydratedDocument, Model, Schema, model } from "mongoose";
 
-import { Password } from '../services/password'
+import { PasswordManager } from '../services/password-manager'
 
 interface User {
   email: string;
@@ -42,7 +42,7 @@ const userSchema = new Schema<UserDocument, UserModel>(
 
 userSchema.pre('save', async function (done) {
   if (this.isModified('password')) {
-    const hashedPassword = await Password.toHash(this.get('password'));
+    const hashedPassword = await PasswordManager.toHash(this.get('password'));
     this.set('password', hashedPassword)
   }
   done();

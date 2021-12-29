@@ -1,9 +1,10 @@
 import { Request as GenericRequest, Response, Router } from "express"
-import { body, validationResult } from 'express-validator'
+import { body } from 'express-validator'
 import jwt from 'jsonwebtoken';
 
-import { BadRequestError, RequestValidationError } from '../../types/errors'
+import { BadRequestError } from '../../types/errors'
 import { UserModel } from '../models/user'
+import { validateRequest } from '../middlewares/validate-request'
 
 export const signupRouter = Router();
 
@@ -22,13 +23,8 @@ signupRouter.post(
     body('email').isEmail().withMessage("Email must be valid"),
     body('password').trim().isLength({ min: 4, max: 20 }).withMessage("Password must be between 4 and 20 characters"),
   ],
+  validateRequest,
   async (req: Request<UserLogin>, res: Response) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
-
     const { email, password } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
