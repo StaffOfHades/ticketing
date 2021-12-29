@@ -28,13 +28,13 @@ const userSchema = new Schema<UserDocument, UserModel>(
     },
     toJSON: {
       transform: (_, output) => {
-        output.id = output._id;
         delete output._id;
         delete output.createdAt;
         delete output.password;
         delete output.updatedAt;
         return output;
       },
+      virtuals: true,
       versionKey: false,
     },
   },

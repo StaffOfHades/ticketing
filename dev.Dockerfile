@@ -13,6 +13,8 @@ COPY [".eslintrc.json", "babel.config.json", "jest.config.js", "jest.preset.js",
 COPY ./apps ./apps/
 COPY ./libs ./libs
 
+ENV JWT_SIGNATURE=asdf
+
 EXPOSE 3000
 EXPOSE 4200
 
