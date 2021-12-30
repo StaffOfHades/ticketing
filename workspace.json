@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "authentication": "apps/authentication",
+    "authentication-service": "apps/authentication-service",
     "ticketing": "apps/ticketing",
     "ticketing-e2e": "apps/ticketing-e2e"
   }

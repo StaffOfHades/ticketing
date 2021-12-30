@@ -30,7 +30,7 @@ spec:
   selector:
     app: ticketing
   ports:
-    - name: authentication-clusterip
+    - name: authentication-service-clusterip
       protocol: TCP
       port: 3000
       targetPort: 3000

@@ -13,7 +13,7 @@ build:
       dockerfile: dev.Dockerfile
     sync:
       manual:
-      - src: "apps/authentication/src/**/*.{js,ts}"
+      - src: "apps/authentication-service/src/**/*.{js,ts}"
         dest: .
       - src: "apps/ticketing/{components,pages}/**/*.{css,sass,scss}"
         dest: .

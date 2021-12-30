@@ -1,0 +1,75 @@
+{
+  "root": "apps/authentication-service",
+  "sourceRoot": "apps/authentication-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/authentication-service",
+        "main": "apps/authentication-service/src/main.ts",
+        "tsConfig": "apps/authentication-service/tsconfig.app.json",
+        "assets": ["apps/authentication-service/src/assets"],
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/authentication-service/src/environments/environment.ts",
+              "with": "apps/authentication-service/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "build-image": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker build -f ./apps/authentication-service/dev.Dockerfile . -t {args.dockerid}/authentication-service:dev-{args.dockertag}"
+      },
+      "configurations": {
+        "production": {
+          "command": "docker build -f ./apps/authentication-service/Dockerfile . -t {args.dockerid}/authentication-service:{args.dockertag}"
+        }
+      }
+    },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker push {args.dockerid}/authentication-service:dev-{args.dockertag}"
+      },
+      "configurations": {
+        "production": {
+          "command": "docker push {args.dockerid}/authentication-service:{args.dockertag}"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "authentication-service:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/authentication-service/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/authentication-service"],
+      "options": {
+        "jestConfig": "apps/authentication-service/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
