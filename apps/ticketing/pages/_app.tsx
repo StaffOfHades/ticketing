@@ -2,6 +2,8 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
 
+import { Layout } from '../components/layout'
+
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -9,9 +11,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Welcome to ticketing!</title>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <main className="app">
+      <Layout>
         <Component {...pageProps} />
-      </main>
+      </Layout>
     </>
   );
 }

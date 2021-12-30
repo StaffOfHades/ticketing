@@ -6,7 +6,7 @@ module.exports = {
   mode: 'jit',
   presets: [require('../../tailwind-preset.base.js')],
   content: [
-    join(__dirname, 'pages/**/*.{js,ts,jsx,tsx}'),
+    join(__dirname, '{components,hooks,pages}/**/*.{js,ts,jsx,tsx}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
   variants: {

@@ -15,9 +15,9 @@ build:
       manual:
       - src: "apps/authentication/src/**/*.{js,ts}"
         dest: .
-      - src: "apps/ticketing/{pages}/**/*.{css,sass,scss}"
+      - src: "apps/ticketing/{components,pages}/**/*.{css,sass,scss}"
         dest: .
-      - src: "apps/ticketing/{hooks,pages,specs}/**/*.{js,jsx,ts,tsx}"
+      - src: "apps/ticketing/{components,hooks,pages,specs}/**/*.{js,jsx,ts,tsx}"
         dest: .
       - src: "libs/**/*.{js,ts}"
         dest: .

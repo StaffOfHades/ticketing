@@ -1,0 +1,40 @@
+.LoadingScreen {
+  animation: fade 0.4s ease-in forwards;
+}
+
+.Ball {
+  animation: oscillate 0.7s ease-in forwards infinite;
+  &:nth-child(1) {
+    animation-delay: 500ms;
+  }
+  &:nth-child(2) {
+    animation-delay: 1000ms;
+  }
+  &:nth-child(3) {
+    animation-delay: 2000ms;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes oscillate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
