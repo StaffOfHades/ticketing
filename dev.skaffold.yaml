@@ -15,15 +15,15 @@ build:
       manual:
       - src: "apps/authentication/src/**/*.{js,ts}"
         dest: .
-      - src: "apps/ticketing/src/**/*.{css,sass,scss}"
+      - src: "apps/ticketing/{pages}/**/*.{css,sass,scss}"
         dest: .
-      - src: "apps/ticketing/src/**/*.{js,jsx,ts,tsx}"
-        dest: .
-      - src: "apps/ticketing/src/**/*.html"
+      - src: "apps/ticketing/{hooks,pages,specs}/**/*.{js,jsx,ts,tsx}"
         dest: .
       - src: "libs/**/*.{js,ts}"
         dest: .
-      - src: "**/tsconfig.{*}.json"
+      - src: "**/tsconfig.*.json"
+        dest: .
+      - src: "**/*.config.js"
         dest: .
 deploy:
   kubectl:

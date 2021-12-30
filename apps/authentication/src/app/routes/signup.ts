@@ -29,7 +29,7 @@ signupRouter.post(
 
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
-      throw new BadRequestError("Email in use");
+      throw new BadRequestError("Email already in use", 'email');
     }
 
     const newUser = UserModel.build({ email, password });

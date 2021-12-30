@@ -8,7 +8,7 @@ COPY ["package.json", "package-lock.json", "./"]
 
 RUN npm ci
 
-COPY [".eslintrc.json", "babel.config.json", "jest.config.js", "jest.preset.js", "nx.json", "tsconfig.base.json", "workspace.json", "./"]
+COPY [".eslintrc.json", "babel.config.json", "jest.config.js", "jest.preset.js", "nx.json", "tailwind-preset.base.js", "tsconfig.base.json", "workspace.json", "./"]
 
 COPY ./apps ./apps/
 COPY ./libs ./libs
