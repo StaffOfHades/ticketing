@@ -11,22 +11,22 @@ import {
   SupportIcon,
   ViewGridIcon,
   XIcon,
-} from '@heroicons/react/outline'
-import { ChevronDownIcon } from '@heroicons/react/solid'
-import { Fragment, forwardRef, useContext } from 'react'
-import Link from 'next/link'
-import { Popover, Transition } from '@headlessui/react'
+} from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import { Fragment, forwardRef, useContext } from 'react';
+import Link from 'next/link';
+import { Popover, Transition } from '@headlessui/react';
 import axios from 'axios';
 
-import { CurrentUserContext } from '../../hooks/use-current-user'
+import { CurrentUserContext } from '../../hooks/use-current-user';
 
-const StyledLink = forwardRef(
-  ({ children, href, ...props }, ref) => (
-    <Link href={href}>
-      <a {...props} ref={ref}>{children}</a>
-    </Link>
-  )
-)
+const StyledLink = forwardRef(({ children, href, ...props }, ref) => (
+  <Link href={href}>
+    <a {...props} ref={ref}>
+      {children}
+    </a>
+  </Link>
+));
 
 export const Navbar = () => {
   const { currentUser, signout } = useContext(CurrentUserContext);
@@ -62,10 +62,12 @@ export const Navbar = () => {
               >
                 Sign out
               </button>
-              ) :
-              (
+            ) : (
               <Fragment>
-                <StyledLink className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" href="/auth/signin">
+                <StyledLink
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                  href="/auth/signin"
+                >
                   Sign in
                 </StyledLink>
                 <StyledLink
@@ -75,8 +77,7 @@ export const Navbar = () => {
                   Sign up
                 </StyledLink>
               </Fragment>
-              )
-            }
+            )}
           </div>
         </div>
       </div>
@@ -90,7 +91,10 @@ export const Navbar = () => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <Popover.Panel focus className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <Popover.Panel
+          focus
+          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+        >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
@@ -121,34 +125,32 @@ export const Navbar = () => {
                       Sign out
                     </button>
                   </Popover.Button>
-                )
-                : (
-                    <Fragment>
+                ) : (
+                  <Fragment>
+                    <Popover.Button
+                      as={StyledLink}
+                      className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                      href="/auth/signup"
+                    >
+                      Sign up
+                    </Popover.Button>
+                    <p className="mt-6 text-center text-base font-medium text-gray-500">
+                      Existing customer?{' '}
                       <Popover.Button
                         as={StyledLink}
-                        className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                        href="/auth/signup"
+                        className="text-indigo-600 hover:text-indigo-500"
+                        href="/auth/signin"
                       >
-                        Sign up
+                        Sign in
                       </Popover.Button>
-                      <p className="mt-6 text-center text-base font-medium text-gray-500">
-                        Existing customer?{' '}
-                        <Popover.Button
-                          as={StyledLink}
-                          className="text-indigo-600 hover:text-indigo-500"
-                          href="/auth/signin"
-                        >
-                          Sign in
-                        </Popover.Button>
-                      </p>
-                    </Fragment>
-                  )
-                }
+                    </p>
+                  </Fragment>
+                )}
               </div>
             </div>
           </div>
         </Popover.Panel>
       </Transition>
     </Popover>
-  )
-}
+  );
+};

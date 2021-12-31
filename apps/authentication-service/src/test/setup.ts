@@ -33,9 +33,7 @@ declare global {
 
 global.signin = async (user) => {
   const userJWT = jwt.sign(user, process.env.JWT_SIGNATURE);
-  const cookieValue = Buffer.from(JSON.stringify({ jwt: userJWT })).toString(
-    'base64'
-  );
+  const cookieValue = Buffer.from(JSON.stringify({ jwt: userJWT })).toString('base64');
   const cookies = [`session=${cookieValue}; path=/; httponly`];
 
   return Promise.resolve(cookies);

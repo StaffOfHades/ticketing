@@ -16,9 +16,7 @@ const start = async () => {
   }
 
   try {
-    await mongoose.connect(
-      'mongodb://authentication-mongo-clusterip-srv:27017/authentication'
-    );
+    await mongoose.connect('mongodb://authentication-mongo-clusterip-srv:27017/authentication');
     console.log('MongoDB connection to authentication ready');
   } catch (error) {
     console.error(error);

@@ -1,18 +1,18 @@
-import DefaultErrorPage from 'next/error'
+import DefaultErrorPage from 'next/error';
 
-import { CurrentUserContext, useCurrentUser } from '../../hooks/use-current-user'
-import { Navbar } from '../navbar'
-import { LoadingScreen } from './LoadingScreen'
+import { CurrentUserContext, useCurrentUser } from '../../hooks/use-current-user';
+import { Navbar } from '../navbar';
+import { LoadingScreen } from './LoadingScreen';
 
 export const Layout = ({ children }) => {
-  const { currentUser, error, isLoading, signout } = useCurrentUser()
+  const { currentUser, error, isLoading, signout } = useCurrentUser();
 
   if (isLoading) {
-    return <LoadingScreen />
+    return <LoadingScreen />;
   }
 
   if (error) {
-    return <DefaultErrorPage />
+    return <DefaultErrorPage />;
   }
 
   return (
@@ -20,5 +20,5 @@ export const Layout = ({ children }) => {
       <Navbar />
       <main className="container mx-auto px-4 mt-4">{children}</main>
     </CurrentUserContext.Provider>
-  )
-}
+  );
+};

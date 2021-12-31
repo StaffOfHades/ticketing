@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   darkMode: 'media',
@@ -13,4 +13,4 @@ module.exports = {
     extend: {},
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
-}
+};

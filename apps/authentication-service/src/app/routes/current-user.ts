@@ -7,4 +7,4 @@ router.get('/users/current-user', currentUser, (req, res) => {
   res.status(200).send({ currentUser: req.currentUser ?? null });
 });
 
-export { router as currentUserRouter }
+export { router as currentUserRouter };

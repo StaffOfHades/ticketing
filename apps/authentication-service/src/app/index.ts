@@ -21,9 +21,7 @@ const app = express();
 app.set('trust proxy', true);
 
 app.use(json());
-app.use(
-  cookieSession({ secure: process.env.NODE_ENV !== 'test', signed: false })
-);
+app.use(cookieSession({ secure: process.env.NODE_ENV !== 'test', signed: false }));
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' }));
 
 app.use(currentUserRouter);

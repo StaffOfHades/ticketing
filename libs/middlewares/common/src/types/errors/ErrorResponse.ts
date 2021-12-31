@@ -13,10 +13,7 @@ export interface ErrorResponseSerializer {
   statusCode: number;
 }
 
-export abstract class CustomError
-  extends Error
-  implements ErrorResponseSerializer
-{
+export abstract class CustomError extends Error implements ErrorResponseSerializer {
   constructor(message: string, public statusCode: number) {
     super(message);
   }

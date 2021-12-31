@@ -15,9 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@udemy.com/middlewares/authentication": [
-        "libs/middlewares/authentication/src/index.ts"
-      ],
+      "@udemy.com/middlewares/authentication": ["libs/middlewares/authentication/src/index.ts"],
       "@udemy.com/middlewares/common": ["libs/middlewares/common/src/index.ts"]
     }
   },

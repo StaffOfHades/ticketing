@@ -29,10 +29,7 @@ router.post(
       throw new BadRequestError('Invalid credentials');
     }
 
-    const passwordsMatch = await PasswordManager.compare(
-      existingUser.password,
-      password
-    );
+    const passwordsMatch = await PasswordManager.compare(existingUser.password, password);
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid credentials');
     }
@@ -50,4 +47,4 @@ router.post(
   }
 );
 
-export { router as signinRouter }
+export { router as signinRouter };

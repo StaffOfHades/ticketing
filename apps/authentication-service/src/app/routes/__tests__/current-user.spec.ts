@@ -8,10 +8,7 @@ describe('GET /users/current-user', () => {
     const user = { email: 'test@test.com', id: '1' };
     const cookie = await global.signin(user);
 
-    const response = await request(app)
-      .get('/users/current-user')
-      .set('Cookie', cookie)
-      .send();
+    const response = await request(app).get('/users/current-user').set('Cookie', cookie).send();
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({ currentUser: user });
