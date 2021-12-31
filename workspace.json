@@ -5,6 +5,7 @@
     "middlewares-authentication": "libs/middlewares/authentication",
     "middlewares-common": "libs/middlewares/common",
     "ticketing": "apps/ticketing",
-    "ticketing-e2e": "apps/ticketing-e2e"
+    "ticketing-e2e": "apps/ticketing-e2e",
+    "tickets-service": "apps/tickets-service"
   }
 }

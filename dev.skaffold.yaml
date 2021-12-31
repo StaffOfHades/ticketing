@@ -13,7 +13,7 @@ build:
         dockerfile: dev.Dockerfile
       sync:
         manual:
-          - src: 'apps/authentication-service/src/**/*.{js,ts}'
+          - src: 'apps/{authentication,tickets}-service/src/**/*.{js,ts}'
             dest: .
           - src: 'apps/ticketing/{components,pages}/**/*.{css,sass,scss}'
             dest: .
@@ -28,4 +28,4 @@ deploy:
     manifests:
       - infra/k8s/development/*.yaml
       - infra/k8s/authentication-mongo-depl.yaml
-      - infra/k8s/ingress-srv.yaml
+      - infra/k8s/tickets-mongo-depl.yaml

@@ -16,6 +16,7 @@ COPY ./libs ./libs
 ENV JWT_SIGNATURE=asdf
 
 EXPOSE 3000
+EXPOSE 3333
 EXPOSE 4200
 
 CMD ["nx", "run-many", "--target=serve", "--all", "--verbose"]

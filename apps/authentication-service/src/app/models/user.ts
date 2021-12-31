@@ -2,7 +2,7 @@ import { Document, HydratedDocument, Model, Schema, model } from 'mongoose';
 
 import { PasswordManager } from '../services/password-manager';
 
-interface User {
+export interface User {
   email: string;
   password: string;
 }

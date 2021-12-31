@@ -3,14 +3,9 @@ import { Response, Router } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
-import { UserModel } from '../models/user';
+import { User, UserModel } from '../models/user';
 
 export const router = Router();
-
-interface UserDetails {
-  email: string;
-  password: string;
-}
 
 router.post(
   '/users/signup',
@@ -22,7 +17,7 @@ router.post(
       .withMessage('Password must be between 4 and 20 characters'),
   ],
   validateRequest,
-  async (req: TypedRequest<UserDetails>, res: Response) => {
+  async (req: TypedRequest<User>, res: Response) => {
     const { email, password } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
