@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { currentUser } from '@udemy.com/middlewares/authentication';
 
 const router = Router();

@@ -7,6 +7,7 @@ interface UserPayload extends Record<string, unknown> {
 }
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       currentUser?: UserPayload;

@@ -21,7 +21,7 @@ export const useCurrentUser = () => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [mutate]);
 
   return {
     currentUser: data?.currentUser ?? null,

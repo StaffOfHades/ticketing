@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { Fragment, forwardRef, useContext } from 'react';
+import Image from 'next/image'
 import Link from 'next/link';
 import { Popover, Transition } from '@headlessui/react';
 import axios from 'axios';
@@ -27,6 +28,7 @@ const StyledLink = forwardRef(({ children, href, ...props }, ref) => (
     </a>
   </Link>
 ));
+StyledLink.displayName = 'StyledLink';
 
 export const Navbar = () => {
   const { currentUser, signout } = useContext(CurrentUserContext);
@@ -39,7 +41,7 @@ export const Navbar = () => {
             <Link href="/">
               <a>
                 <span className="sr-only">Workflow</span>
-                <img
+                <Image
                   className="h-8 w-auto sm:h-10"
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                   alt=""
@@ -99,7 +101,7 @@ export const Navbar = () => {
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
+                  <Image
                     className="h-8 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                     alt="Workflow"

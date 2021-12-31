@@ -1,6 +1,5 @@
 import request from 'supertest';
 
-import { UserModel } from '../../models/user';
 import { app } from '../../index';
 
 describe('GET /users/current-user', () => {

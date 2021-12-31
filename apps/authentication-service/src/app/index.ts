@@ -22,7 +22,11 @@ app.set('trust proxy', true);
 
 app.use(json());
 app.use(cookieSession({ secure: process.env.NODE_ENV !== 'test', signed: false }));
-app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' }));
+app.use(morgan(
+  'dev',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  { skip: (req, res) => process.env.NODE_ENV === 'test' },
+));
 
 app.use(currentUserRouter);
 app.use(signinRouter);

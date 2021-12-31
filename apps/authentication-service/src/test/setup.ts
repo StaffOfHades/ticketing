@@ -13,7 +13,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   const collections = await mongoose.connection.db.collections();
-  for (let collection of collections) {
+  for (const collection of collections) {
     await collection.deleteMany({});
   }
 });
@@ -24,6 +24,7 @@ afterAll(async () => {
 });
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Global {
       signin: (user: { email: string; id: string }) => Promise<Array<string>>;
