@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@udemy.com/middlewares/authentication": ["libs/middlewares/authentication/src/index.ts"],
-      "@udemy.com/middlewares/common": ["libs/middlewares/common/src/index.ts"]
+      "@udemy.com/middlewares/common": ["libs/middlewares/common/src/index.ts"],
+      "@udemy.com/nats/common": ["libs/nats/common/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

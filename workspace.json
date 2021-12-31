@@ -4,6 +4,7 @@
     "authentication-service": "apps/authentication-service",
     "middlewares-authentication": "libs/middlewares/authentication",
     "middlewares-common": "libs/middlewares/common",
+    "nats-common": "libs/nats/common",
     "ticketing": "apps/ticketing",
     "ticketing-e2e": "apps/ticketing-e2e",
     "tickets-service": "apps/tickets-service"
