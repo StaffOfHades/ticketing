@@ -59,7 +59,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/authentication-service/**/*.ts"]
+        "lintFilePatterns": ["apps/authentication-service/**/*.{ts,tsx}"]
       }
     },
     "test": {
