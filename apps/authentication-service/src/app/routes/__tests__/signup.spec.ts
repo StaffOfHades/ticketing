@@ -2,7 +2,7 @@ import request from 'supertest';
 
 import { app } from '../../index';
 
-describe('/users/signup', () => {
+describe('POST /users/signup', () => {
   it('returns a 201 on successful signup', () => {
     return request(app)
       .post('/users/signup')

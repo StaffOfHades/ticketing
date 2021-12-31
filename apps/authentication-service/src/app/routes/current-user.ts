@@ -1,8 +1,10 @@
 import { Request, Response, Router } from 'express';
 import { currentUser } from '@udemy.com/middlewares/authentication';
 
-export const currentUserRouter = Router();
+const router = Router();
 
-currentUserRouter.get('/users/current-user', currentUser, (req, res) => {
+router.get('/users/current-user', currentUser, (req, res) => {
   res.status(200).send({ currentUser: req.currentUser ?? null });
 });
+
+export { router as currentUserRouter }

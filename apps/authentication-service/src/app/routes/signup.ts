@@ -1,22 +1,18 @@
-import { BadRequestError, validateRequest } from '@udemy.com/middlewares/common';
-import { Request as GenericRequest, Response, Router } from 'express';
+import { BadRequestError, TypedRequest, validateRequest } from '@udemy.com/middlewares/common';
+import { Response, Router } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
 import { UserModel } from '../models/user';
 
-export const signupRouter = Router();
+export const router = Router();
 
-interface UserLogin {
+interface UserDetails {
   email: string;
   password: string;
 }
 
-interface Request<T = unknown> extends GenericRequest {
-  body: T;
-}
-
-signupRouter.post(
+router.post(
   '/users/signup',
   [
     body('email').isEmail().withMessage('Email must be valid'),
@@ -26,7 +22,7 @@ signupRouter.post(
       .withMessage('Password must be between 4 and 20 characters'),
   ],
   validateRequest,
-  async (req: Request<UserLogin>, res: Response) => {
+  async (req: TypedRequest<UserDetails>, res: Response) => {
     const { email, password } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
@@ -49,3 +45,5 @@ signupRouter.post(
     res.status(201).send(newUser);
   }
 );
+
+export { router as signupRouter }

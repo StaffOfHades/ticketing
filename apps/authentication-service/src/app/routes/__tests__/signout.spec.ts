@@ -2,7 +2,7 @@ import request from 'supertest';
 
 import { app } from '../../index';
 
-describe('/users/signout', () => {
+describe('POST /users/signout', () => {
   it('clears the cookie after signing out', async () => {
     const response = await request(app).post('/users/signout').send({});
 

@@ -1,30 +1,26 @@
-import { BadRequestError, validateRequest } from '@udemy.com/middlewares/common';
-import { Request as GenericRequest, Response, Router } from 'express';
+import { BadRequestError, TypedRequest, validateRequest } from '@udemy.com/middlewares/common';
+import { Response, Router } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
 import { PasswordManager } from '../services/password-manager';
 import { UserModel } from '../models/user';
 
-export const signinRouter = Router();
+const router = Router();
 
 interface UserLogin {
   email: string;
   password: string;
 }
 
-interface Request<T = unknown> extends GenericRequest {
-  body: T;
-}
-
-signinRouter.post(
+router.post(
   '/users/signin',
   [
     body('email').isEmail().withMessage('Email must be valid'),
-    body('password').trim().notEmpty().withMessage('Password must be supplied'),
+    body('password').trim().notEmpty().withMessage('Password must be provided'),
   ],
   validateRequest,
-  async (req: Request<UserLogin>, res: Response) => {
+  async (req: TypedRequest<UserLogin>, res: Response) => {
     const { email, password } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
@@ -53,3 +49,5 @@ signinRouter.post(
     res.status(200).send(existingUser);
   }
 );
+
+export { router as signinRouter }

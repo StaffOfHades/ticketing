@@ -1,3 +1,3 @@
 export * from './lib/error-handler';
 export * from './lib/validate-request';
-export * from './types/errors';
+export * from './types';

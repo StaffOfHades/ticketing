@@ -3,7 +3,7 @@ import request from 'supertest';
 import { UserModel } from '../../models/user';
 import { app } from '../../index';
 
-describe('/users/current-user', () => {
+describe('GET /users/current-user', () => {
   it('returns with current user if authenticated', async () => {
     const user = { email: 'test@test.com', id: '1' };
     const cookie = await global.signin(user);

@@ -3,7 +3,7 @@ import request from 'supertest';
 import { UserModel } from '../../models/user';
 import { app } from '../../index';
 
-describe('/users/signin', () => {
+describe('POST /users/signin', () => {
   const userLogin = { email: 'test@test.com', password: 'password' };
   it('returns a 400 when email does not exist on database', () => {
     return request(app)
