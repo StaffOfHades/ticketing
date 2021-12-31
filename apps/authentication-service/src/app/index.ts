@@ -3,16 +3,13 @@
  * This is only a minimal backend to get started.
  */
 
+import { NotFoundError, errorHandler } from '@udemy.com/middlewares/common';
 import cookieSession from 'cookie-session';
 import express from 'express';
 import { json } from 'body-parser';
 import morgan from 'morgan';
 
 import 'express-async-errors';
-
-import { NotFoundError } from '../types/errors';
-
-import { errorHandler } from './middlewares/error-handler';
 
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';

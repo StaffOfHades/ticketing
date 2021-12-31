@@ -1,0 +1,23 @@
+{
+  "root": "libs/middlewares/common",
+  "sourceRoot": "libs/middlewares/common/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/middlewares/common/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/middlewares/common"],
+      "options": {
+        "jestConfig": "libs/middlewares/common/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

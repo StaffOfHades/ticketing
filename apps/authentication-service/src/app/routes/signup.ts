@@ -1,10 +1,9 @@
+import { BadRequestError, validateRequest } from '@udemy.com/middlewares/common';
 import { Request as GenericRequest, Response, Router } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
-import { BadRequestError } from '../../types/errors';
 import { UserModel } from '../models/user';
-import { validateRequest } from '../middlewares/validate-request';
 
 export const signupRouter = Router();
 

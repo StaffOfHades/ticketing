@@ -1,6 +1,5 @@
 import { Request, Response, Router } from 'express';
-
-import { currentUser } from '../middlewares/current-user';
+import { currentUser } from '@udemy.com/middlewares/authentication';
 
 export const currentUserRouter = Router();
 

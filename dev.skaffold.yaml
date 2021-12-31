@@ -19,7 +19,7 @@ build:
         dest: .
       - src: "apps/ticketing/{components,hooks,pages,specs}/**/*.{js,jsx,ts,tsx}"
         dest: .
-      - src: "libs/**/*.{js,ts}"
+      - src: "libs/**/*.{js,jsx,ts,tsx}"
         dest: .
       - src: "**/tsconfig.*.json"
         dest: .

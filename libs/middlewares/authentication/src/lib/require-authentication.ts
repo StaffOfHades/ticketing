@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import { NotAuthorizedError } from '@udemy.com/middlewares/common';
 import jwt from 'jsonwebtoken';
-
-import { NotAuthorizedError } from '../../types/errors';
 
 export const requireAuthentication = (
   req: Request,
