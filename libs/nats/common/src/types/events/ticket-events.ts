@@ -1,5 +1,5 @@
 import { Event } from './event';
-import { Subjects } from '../subjects';
+import { MessageSubject } from '../message-subject';
 
 interface Ticket {
   id: string;
@@ -10,10 +10,10 @@ interface Ticket {
 
 export interface TicketCreatedEvent extends Event {
   data: Ticket;
-  subject: Subjects.TicketCreated;
+  subject: MessageSubject.TicketCreated;
 }
 
 export interface TicketUpdatedEvent extends Event {
-  data: Ticket['id'] & Partial<Omit<Ticket, 'id'>>;
-  subject: Subjects.TicketUpdated;
+  data: Pick<Ticket, 'id'> & Partial<Omit<Ticket, 'id'>>;
+  subject: MessageSubject.TicketUpdated;
 }

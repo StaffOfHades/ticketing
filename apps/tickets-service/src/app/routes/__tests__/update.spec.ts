@@ -3,6 +3,7 @@ import request from 'supertest';
 
 import { TicketModel } from '../../models/ticket';
 import { app } from '../../index';
+import { client } from '../../nats/client';
 
 describe('PUT /tickets/:id', () => {
   it('returns a 401 error if a user is not authenticated', () => {
@@ -67,5 +68,18 @@ describe('PUT /tickets/:id', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject(ticketData);
+  });
+  it('publishes an event with updated values of a ticket', async () => {
+    const user = { email: 'test@test.com', id: '1' };
+    const newTicket = TicketModel.build({ title: 'New ticket', price: 1.2, userId: user.id });
+    await newTicket.save();
+
+    const cookie = await global.signin(user);
+    const response = await request(app)
+      .put(`/tickets/${newTicket.id}`)
+      .set('Cookie', cookie)
+      .send({ title: 'Title', price: 10.0 });
+
+    await expect(client.instance.publish).toHaveBeenCalled();
   });
 });

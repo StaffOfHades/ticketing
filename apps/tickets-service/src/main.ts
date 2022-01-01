@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import process from 'process';
 
 import { app } from './app';
+import { client } from './app/nats/client';
 
 const port = process.env.port || 3333;
 
@@ -15,9 +16,35 @@ const start = async () => {
     throw new Error('JWT_SIGNATURE env variable not defined');
   }
 
+  if (process.env.NODE_ENV === 'production' && !process.env.MONGO_URI) {
+    throw new Error('MONGO_URI env variable not defined');
+  }
+
+  if (
+    process.env.NODE_ENV === 'production' &&
+    (!process.env.NATS_CLUSTER_ID || !process.env.NATS_CLIENT_ID || !process.env.NATS_URL)
+  ) {
+    throw new Error(
+      'One of [NATS_CLUSTER_ID, NATS_CLIENT_ID, NATS_URL] env variables where not defined'
+    );
+  }
+
   try {
-    await mongoose.connect('mongodb://tickets-mongo-clusterip-srv:27017/tickets');
+    await mongoose.connect(
+      process.env.MONGO_URI || 'mongodb://tickets-mongo-clusterip-srv:27017/tickets'
+    );
     console.log('MongoDB connection to tickets ready');
+  } catch (error) {
+    console.error(error);
+  }
+
+  try {
+    await client.connect(
+      process.env.NATS_CLUSTER_ID || 'ticketing',
+      process.env.NATS_CLIENT_ID || new mongoose.Types.ObjectId().toHexString(),
+      process.env.NATS_URL || 'http://nats-clusterip-srv:4222'
+    );
+    console.log('NATS connection established');
   } catch (error) {
     console.error(error);
   }
@@ -31,12 +58,46 @@ const start = async () => {
 
 process.on('SIGINT', () => {
   console.info('Process interrupted');
-  process.exit(0);
+
+  const promises: Array<Promise<unknown>> = [];
+
+  try {
+    promises.push(
+      mongoose.connection.close().then(() => console.log('MongoDB connection closed'))
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  try {
+    promises.push(client.close().then(() => console.log('NATS connection closed')));
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  Promise.allSettled(promises).then(() => process.exit(0));
 });
 
 process.on('SIGTERM', () => {
   console.info('Process terminated');
-  process.exit(0);
+
+  const promises: Array<Promise<unknown>> = [];
+
+  try {
+    promises.push(
+      mongoose.connection.close().then(() => console.log('MongoDB connection closed'))
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  try {
+    promises.push(client.close().then(() => console.log('NATS connection closed')));
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  Promise.allSettled(promises).then(() => process.exit(0));
 });
 
 start();

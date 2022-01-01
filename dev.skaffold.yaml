@@ -21,8 +21,6 @@ build:
             dest: .
           - src: 'libs/**/*.{js,jsx,ts,tsx}'
             dest: .
-          - src: '**/tsconfig.*.json'
-            dest: .
 deploy:
   kubectl:
     manifests:

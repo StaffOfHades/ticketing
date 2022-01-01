@@ -9,6 +9,8 @@ import { param, body } from 'express-validator';
 import { requireAuthentication } from '@udemy.com/middlewares/authentication';
 
 import { Ticket, TicketModel } from '../models/ticket';
+import { TicketUpdatedPublisher } from '../nats/publishers';
+import { client } from '../nats/client';
 
 const router = Router();
 
@@ -37,6 +39,12 @@ router.put(
     });
 
     await ticket.save();
+
+    new TicketUpdatedPublisher(client.instance).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+    });
 
     res.status(200).send(ticket);
   }

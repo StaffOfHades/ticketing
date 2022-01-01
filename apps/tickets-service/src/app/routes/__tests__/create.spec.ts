@@ -2,6 +2,7 @@ import request from 'supertest';
 
 import { TicketModel } from '../../models/ticket';
 import { app } from '../../index';
+import { client } from '../../nats/client';
 
 describe('POST /tickets', () => {
   it('has a route handler listening to requests', async () => {
@@ -60,5 +61,14 @@ describe('POST /tickets', () => {
 
     expect(response.status).toBe(201);
     expect(newTicket).toMatchObject(response.body);
+  });
+  it('publishes an event of new ticket created', async () => {
+    const cookie = await global.signin();
+    const response = await request(app)
+      .post('/tickets')
+      .set('Cookie', cookie)
+      .send({ title: 'Title', price: 10.0 });
+
+    await expect(client.instance.publish).toHaveBeenCalled();
   });
 });

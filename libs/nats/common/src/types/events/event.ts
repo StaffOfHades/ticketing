@@ -1,6 +1,6 @@
-import { Subjects } from '../subjects';
+import { MessageSubject } from '../message-subject';
 
 export interface Event {
   data: unknown;
-  subject: Subjects;
+  subject: MessageSubject;
 }

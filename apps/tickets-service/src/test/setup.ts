@@ -2,6 +2,8 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
+jest.mock('../app/nats/client');
+
 let mongo: undefined | MongoMemoryServer;
 
 beforeAll(async () => {
@@ -12,6 +14,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
   for (const collection of collections) {
     await collection.deleteMany({});

@@ -17,7 +17,7 @@ export abstract class MessageListener<E extends Event> {
 
   constructor(
     private client: Stan,
-    { ackWait = 5 * 100, queueGroup, subject }: Options & E['subject']
+    { ackWait = 5 * 100, queueGroup, subject }: Options & Pick<E, 'subject'>
   ) {
     this.ackWait = ackWait;
     this.queueGroup = queueGroup;
