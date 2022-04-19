@@ -34,6 +34,10 @@ spec:
       protocol: TCP
       port: 3000
       targetPort: 3000
+    - name: orders-service-clusterip
+      protocol: TCP
+      port: 3003
+      targetPort: 3003
     - name: ticketing-clusterip
       protocol: TCP
       port: 4200

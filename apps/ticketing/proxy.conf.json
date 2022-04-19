@@ -12,5 +12,12 @@
     "pathRewrite": {
       "^/tickets-service": ""
     }
+  },
+  "/orders-service": {
+    "target": "http://localhost:3003",
+    "secure": true,
+    "pathRewrite": {
+      "^/orders-service": ""
+    }
   }
 }
